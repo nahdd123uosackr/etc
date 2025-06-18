@@ -1,10 +1,25 @@
 services:
-    openvscode-server:
-        stdin_open: true
-        tty: true
-        init: true
-        ports:
-            - 3000:3000
-        volumes:
-            - $(pwd):/home/workspace:cached
-        image: gitpod/openvscode-server
+  openvscode-server:
+    image: gitpod/openvscode-server
+    stdin_open: true
+    tty: true
+    init: true
+    volumes:
+      - /alist/uos/docker/vscode/data:/home/workspace:cached
+    networks:
+      - o3
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.vscode-r.rule=Host(`vscode.131.186.17.46.nip.io`)
+        - traefik.http.routers.vscode-r.entrypoints=web,websecure
+        - traefik.http.routers.vscode-r.priority=1
+        - traefik.http.routers.vscode-r.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.vscode-r.service=vscode-s
+        - traefik.http.services.vscode-s.loadbalancer.server.port=5678
+        - traefik.http.services.vscode-s.loadbalancer.passHostHeader=1
+networks:
+  o3:
+    external: true
