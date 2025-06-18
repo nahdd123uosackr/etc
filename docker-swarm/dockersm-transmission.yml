@@ -1,0 +1,34 @@
+services:
+  transmission-openvpn:
+    image: haugene/transmission-openvpn
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - '/alist:/data'
+      - /alist/koofr/docker/transmission/config:/etc/openvpn/custom
+      - /alist/koofr/docker/transmission/config:/config'
+    environment:
+      - OPENVPN_PROVIDER=CUSTOM
+      - OPENVPN_CONFIG=default
+      - OPENVPN_USERNAME=vpn
+      - OPENVPN_PASSWORD=vpn
+      #- LOCAL_NETWORK=192.168.0.0/16
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+    networks:
+      - o1
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.r-transmission.rule=Host(`transmission.131.186.17.46.nip.io`)
+        - traefik.http.routers.r-transmission.entrypoints=websecure
+        - traefik.http.routers.r-transmission.tls.certresolver=leresolver
+        - traefik.http.routers.r-transmission.service=s-transmission
+        - traefik.http.services.s-transmission.loadbalancer.server.port=9091
+networks:
+  o1:
+    external: true
