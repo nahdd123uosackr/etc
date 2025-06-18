@@ -18,7 +18,7 @@ services:
         - traefik.http.routers.vscode-r.priority=1
         - traefik.http.routers.vscode-r.tls.certresolver=letsencryptresolver
         - traefik.http.routers.vscode-r.service=vscode-s
-        - traefik.http.services.vscode-s.loadbalancer.server.port=5678
+        - traefik.http.services.vscode-s.loadbalancer.server.port=3000
         - traefik.http.services.vscode-s.loadbalancer.passHostHeader=1
 networks:
   o3:
