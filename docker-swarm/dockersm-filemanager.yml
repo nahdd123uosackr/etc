@@ -3,8 +3,8 @@ services:
     image: filebrowser/filebrowser
     volumes:
       - /:/srv
-      - /alist/uos/docker/filebrowser/database.db:/database.db
-      - /alist/uos/docker/filebrowser/:/config
+      - filebrowser:/database
+      - filebrowser:/config
     networks:
       - o1
     environment:
@@ -25,3 +25,11 @@ services:
 networks:
   o1:
     external: true
+volumes:
+  filebrowser:
+    driver: rclone
+    driver_opts:
+      remote: "alist:uos/docker/filebrowser/data"
+      allow_other: "true"
+      vfs_cache_mode: writes
+      poll_interval: 0
