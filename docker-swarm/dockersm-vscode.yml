@@ -20,7 +20,7 @@ services:
         - traefik.http.routers.vscode-r.service=vscode-s
         - traefik.http.routers.vscode-r.headers.customrequestheaders.X-Forwarded-Proto=https
         - traefik.http.services.vscode-s.loadbalancer.server.port=3000
-        - traefik.http.services.vscode-s.loadbalancer.passHostHeader=true
+        - traefik.http.services.vscode-s.loadbalancer.passHostHeader=1
 networks:
   o3:
     external: true
