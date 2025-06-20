@@ -7,7 +7,7 @@ services:
       - PGID=0
       - TZ=Asia/Seoul
     volumes:
-      - /alist/uos/docker/vscode/config:/config
+      - /alist/uos/docker/vscode/config:/config:cached
     networks:
       - o3
     deploy:
