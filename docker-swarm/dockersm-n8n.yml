@@ -2,8 +2,7 @@ services:
   n8n_editor:
     image: n8nio/n8n:latest
     volumes:
-      - n8n_data:/home/node/.n8n
-      - /alist:/files
+      - n8n-data:/home/node/.n8n
     networks:
       - o3
     environment:
@@ -33,5 +32,12 @@ networks:
   o3:
     external: true
 volumes:
-  n8n_data:
-    external: true  
+  n8n-data:
+    driver: rclone
+    driver_opts:
+      remote: "alist:uos/docker/n8n/data"
+      allow_other: "true"
+      vfs_cache_mode: writes
+      poll_interval: 0
+
+
