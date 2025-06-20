@@ -4,6 +4,7 @@ services:
     stdin_open: true
     tty: true
     init: true
+    user: "0:0"
     volumes:
       - /alist/uos/docker/vscode/data:/home/workspace:rw
     networks:
