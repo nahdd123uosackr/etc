@@ -27,7 +27,6 @@ services:
         - traefik.http.routers.n8n_editor.service=n8n_editor
         - traefik.http.services.n8n_editor.loadbalancer.server.port=5678
         - traefik.http.services.n8n_editor.loadbalancer.passHostHeader=1
-
 networks:
   o3:
     external: true
