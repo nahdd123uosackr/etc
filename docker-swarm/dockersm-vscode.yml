@@ -1,14 +1,13 @@
 services:
   openvscode-server:
     image: lscr.io/linuxserver/code-server:latest
-
     environment:
       - PUID=0
       - PGID=0
       - TZ=Asia/Seoul
     volumes:
-      - /alist/uos/docker/vscode/workspace:/workspace
-      - /alist/uos/docker/vscode/config:/config
+      - koofr:/docker/vscode/workspace:/workspace
+      - koofr:/docker/vscode/config:/config
     networks:
       - o3
     deploy:
@@ -25,4 +24,10 @@ networks:
   o3:
     external: true
 volumes:
-  vscode:
+  koofr:
+    driver: rclone
+    driver_opts:
+      remote: 'koofr:'
+      allow_other: 'true'
+      vfs_cache_mode: full
+      poll_interval: 0
