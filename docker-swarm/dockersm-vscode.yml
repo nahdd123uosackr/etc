@@ -1,3 +1,4 @@
+  GNU nano 7.2                                                                                                ./dockersm-vscode.yml                                                                                                          
 services:
   openvscode-server:
     image: lscr.io/linuxserver/code-server:latest
@@ -6,8 +7,8 @@ services:
       - PGID=0
       - TZ=Asia/Seoul
     volumes:
-      - koofr:/docker/vscode/workspace:/workspace
-      - koofr:/docker/vscode/config:/config
+      - vscode_config:/config
+      - vscode_workspace:/workspace
     networks:
       - o3
     deploy:
@@ -24,10 +25,19 @@ networks:
   o3:
     external: true
 volumes:
-  koofr:
+  vscode_config:
     driver: rclone
     driver_opts:
-      remote: 'koofr:'
-      allow_other: 'true'
-      vfs_cache_mode: full
+      remote: "koofr:/docker/vscode/config"
+      allow_other: "true"
+      vfs_cache_mode: writes
       poll_interval: 0
+  vscode_workspace:
+    driver: rclone
+    driver_opts:
+      remote: "koofr:/docker/vscode/workspace"
+      allow_other: "true"
+      vfs_cache_mode: writes
+      poll_interval: 0
+
+
