@@ -5,7 +5,7 @@ services:
     environment:
       - TZ=Asia/Seoul
     volumes:
-      - /alist/uos/docker/vscode/config:/config:rw
+      - /alist/uos/docker/vscode/config:/config
     networks:
       - o3
     deploy:
