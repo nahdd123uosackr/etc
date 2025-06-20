@@ -6,7 +6,8 @@ services:
     init: true
     user: "0:0"
     volumes:
-      - /alist/uos/docker/vscode/data/workspaces:/home/workspaces:rw      
+      - /alist/uos/docker/vscode/data/workspaces:/home/workspaces:rw
+      - /alist/uos/docker/vscode/data/workspaces:/home/workspace:rw
     networks:
       - o3
     deploy:
