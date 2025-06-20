@@ -1,6 +1,6 @@
 services:
   openvscode-server:
-    image: lscr.io/linuxserver/openvscode-server:latest
+    image: lscr.io/linuxserver/code-server:latest
 
     environment:
       - PUID=0
@@ -20,7 +20,7 @@ services:
         - traefik.http.routers.vscode-r.entrypoints=websecure
         - traefik.http.routers.vscode-r.tls.certresolver=leresolver
         - traefik.http.routers.vscode-r.service=vscode-s
-        - traefik.http.services.vscode-s.loadbalancer.server.port=3000
+        - traefik.http.services.vscode-s.loadbalancer.server.port=8443
 networks:
   o3:
     external: true
