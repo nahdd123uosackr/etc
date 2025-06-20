@@ -4,7 +4,7 @@ services:
     volumes:
       - /:/srv
       - /alist/uos/docker/filebrowser/database.db:/database.db
-      - /alist/uos/docker/filebrowser/filebrowser.json:/.filebrowser.json
+      - /alist/uos/docker/filebrowser/:/config
     networks:
       - o1
     environment:
