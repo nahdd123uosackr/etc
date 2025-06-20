@@ -14,12 +14,14 @@ services:
       labels:
         - traefik.enable=true
         - traefik.http.routers.vscode-r.rule=Host(`vscode.131.186.17.46.nip.io`)
-        - traefik.http.routers.vscode-r.entrypoints=web,websecure
+        - traefik.http.routers.vscode-r.entrypoints=websecure
         - traefik.http.routers.vscode-r.priority=1
         - traefik.http.routers.vscode-r.tls.certresolver=letsencryptresolver
         - traefik.http.routers.vscode-r.service=vscode-s
+        - traefik.http.routers.vscode-r.headers.customrequestheaders.X-Forwarded-Proto=https
         - traefik.http.services.vscode-s.loadbalancer.server.port=3000
-        - traefik.http.services.vscode-s.loadbalancer.passHostHeader=1
+        - traefik.http.services.vscode-s.loadbalancer.passHostHeader=true
+        - traefik.http.services.vscode-s.loadbalancer.server.scheme=http
 networks:
   o3:
     external: true
