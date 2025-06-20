@@ -27,14 +27,14 @@ volumes:
   vscode_config:
     driver: rclone
     driver_opts:
-      remote: "alist:alist/uos/docker/vscode/config"
+      remote: "alist:uos/docker/vscode/config"
       allow_other: "true"
       vfs_cache_mode: writes
       poll_interval: 0
   vscode_workspace:
     driver: rclone
     driver_opts:
-      remote: "alist:alist/uos/docker/vscode/workspace"
+      remote: "alist:uos/docker/vscode/workspace"
       allow_other: "true"
       vfs_cache_mode: writes
       poll_interval: 0
