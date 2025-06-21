@@ -25,7 +25,7 @@ services:
   adminer:
     image: adminer
     environment:
-      - POSTGRES_USER=postgres
+      - POSTGRES_USER=root
       - POSTGRES_PASSWORD=Jrapt105404@
       - POSTGRES_DB=postgres
       - PUID=0
