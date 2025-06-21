@@ -24,6 +24,7 @@ services:
         - traefik.http.services.postgres-s.loadbalancer.server.port=5432
   adminer:
     image: adminer
+    user: root
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=Jrapt105404@
