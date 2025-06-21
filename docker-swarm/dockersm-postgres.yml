@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data:cached
+    networks:
+      - postgres
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.postgres-r.rule=Host(`postgres.131.186.17.46.nip.io`)
+        - traefik.http.routers.postgres-r.entrypoints=websecure
+        - traefik.http.routers.postgres-r.tls.certresolver=leresolver
+        - traefik.http.routers.postgres-r.service=postgres-s
+        - traefik.http.services.postgres-s.loadbalancer.server.port=5432
+  adminer:
+    image: adminer
+    networks:
+      - postgres
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.adminer-r.rule=Host(`adminer.131.186.17.46.nip.io`)
+        - traefik.http.routers.adminer-r.entrypoints=websecure
+        - traefik.http.routers.adminer-r.tls.certresolver=leresolver
+        - traefik.http.routers.adminer-r.service=adminer-s
+        - traefik.http.services.adminer-s.loadbalancer.server.port=8080
+networks:
+  postgres:
+    driver: overlay
+volumes:
+  postgres_data:
+    driver: rclone
+    driver_opts:
+      remote: "alist:uos/docker/postgres/data"
+      allow_other: "true"
+      vfs_cache_mode: writes
+      poll_interval: 0
