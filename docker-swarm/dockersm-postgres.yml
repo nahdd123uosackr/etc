@@ -1,6 +1,11 @@
 services:
   db:
     image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Jrapt105404@
+      - POSTGRES_DB=postgres
+      - TZ=Asia/Seoul
     volumes:
       - postgres_data:/var/lib/postgresql/data:cached
     networks:
@@ -17,6 +22,11 @@ services:
         - traefik.http.services.postgres-s.loadbalancer.server.port=5432
   adminer:
     image: adminer
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Jrapt105404@
+      - POSTGRES_DB=postgres
+      - TZ=Asia/Seoul
     networks:
       - postgres
     deploy:
