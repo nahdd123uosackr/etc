@@ -5,6 +5,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=Jrapt105404@
       - POSTGRES_DB=postgres
+      - PUID=0
+      - PGID=0
       - TZ=Asia/Seoul
     volumes:
       - postgres_data:/var/lib/postgresql/data:cached
@@ -26,6 +28,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=Jrapt105404@
       - POSTGRES_DB=postgres
+      - PUID=0
+      - PGID=0
       - TZ=Asia/Seoul
     networks:
       - postgres
