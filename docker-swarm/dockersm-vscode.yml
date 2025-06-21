@@ -1,13 +1,13 @@
 services:
   openvscode-server:
-    image: lscr.io/linuxserver/code-server:latest
+    image: codercom/code-server:latest
     environment:
       - PUID=0
       - PGID=0
       - TZ=Asia/Seoul
     volumes:
       - vscode_config:/config
-      - vscode_workspace:/workspace
+      - vscode_workspace:/home/coder/.local
     networks:
       - o3
     deploy:
@@ -19,7 +19,7 @@ services:
         - traefik.http.routers.vscode-r.entrypoints=websecure
         - traefik.http.routers.vscode-r.tls.certresolver=leresolver
         - traefik.http.routers.vscode-r.service=vscode-s
-        - traefik.http.services.vscode-s.loadbalancer.server.port=8443
+        - traefik.http.services.vscode-s.loadbalancer.server.port=8080
 networks:
   o3:
     external: true

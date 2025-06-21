@@ -1,0 +1,15 @@
+{
+  "name": "OpenVSCode Server Dev Container",
+  "dockerComposeFile": ["docker-swarm/dockersm-vscode.yml"],
+  "service": "openvscode-server",
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash"
+  },
+  "extensions": [
+    "ms-vscode.cpptools",
+    "ms-python.python",
+    "dbaeumer.vscode-eslint"
+  ],
+  "remoteUser": "root"
+}
