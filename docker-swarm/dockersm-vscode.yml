@@ -6,7 +6,7 @@ services:
       - PGID=0
       - TZ=Asia/Seoul
     volumes:
-      - vscode_config:/config
+      - vscode_config:/home/coder/.config
       - vscode_workspace:/home/coder/.local
     networks:
       - o3
