@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:latest
+    user: root
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=Jrapt105404@
