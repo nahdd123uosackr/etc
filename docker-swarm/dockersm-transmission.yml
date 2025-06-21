@@ -5,8 +5,8 @@ services:
       - NET_ADMIN
     volumes:
       - '/alist:/data'
-      - /alist/koofr/docker/transmission/config:/etc/openvpn/custom
-      - /alist/koofr/docker/transmission/config:/config'
+      - transmission_db:/etc/openvpn/custom
+      - transmission_db:/config'
     environment:
       - OPENVPN_PROVIDER=CUSTOM
       - OPENVPN_CONFIG=default
@@ -32,3 +32,8 @@ services:
 networks:
   o1:
     external: true
+volumes:
+  transmission_db:
+    driver: rclone
+    driver_opts:
+      remote: "alist:uos/docker/transmission/config"
