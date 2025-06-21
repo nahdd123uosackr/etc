@@ -1,0 +1,39 @@
+
+services:
+  teldrive:
+    image: ghcr.io/divyam234/teldrive
+    volumes:
+      - teldrive_db:/session.db:rw
+      - teldrive_config:/config.toml
+    networks:
+      - o1
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == instance1]
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.r-teldrive.rule=Host(`teldrive.bythe.top`)
+        - traefik.http.routers.r-teldrive.entrypoints=websecure
+        - traefik.http.routers.r-teldrive.tls.certresolver=leresolver
+        - traefik.http.services.s-teldrive.loadbalancer.server.port=8080
+        - traefik.http.routers.r-teldrive.service=s-teldrive
+networks:
+  o1:
+    external: true
+volumes:
+  teldrive_db:
+    driver: rclone
+    driver_opts:
+      remote: "alist:uos/docker/teldrive/session.db"
+      allow_other: "true"
+      vfs_cache_mode: writes
+      poll_interval: 0
+  teldrive_config:
+    driver: rclone
+    driver_opts:
+      remote: "alist:uos/docker/teldrive/config.toml"
+      allow_other: "true"
+      vfs_cache_mode: writes
+      poll_interval: 0
