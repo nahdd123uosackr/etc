@@ -1,5 +1,5 @@
 services:
-  openvscode-server:
+  code-server:
     image: codercom/code-server:latest
     environment:
       - PUID=0
